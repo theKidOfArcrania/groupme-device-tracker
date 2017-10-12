@@ -6,17 +6,19 @@ guidPats = {
     'and':
     re.compile(r'^android-[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$'), 
     'win': re.compile(r'^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}$'),
-    'idev': re.compile(r'^[A-F0-9]{8}(-[A-F0-9]{4}){3}-[A-F0-9]{12}$'),
-    'web': re.compile(r'^[a-f0-9]{32}$')
+    'iOS': re.compile(r'^[A-F0-9]{8}(-[A-F0-9]{4}){3}-[A-F0-9]{12}$'),
+    'web': re.compile(r'^[a-f0-9]{32}$'),
+    'text': re.compile(r'^[a-f0-9]{8}(-[a-f0-9]{4}){3}-[a-f0-9]{12}-0$')
 }
 
-devNames = {'and': 'Android', 'win': 'Windows App', 'idev': 'iPod/iPhone/iPad',
-        'web': 'Web application', 'un': 'Unknown'}
+devNames = {'and': 'Android', 'win': 'Windows App', 'iOS': 'iOS',
+        'web': 'Website', 'text': 'Texting', 'un': 'Unknown'}
 
 def getDevice(sourceGUID):
     for (name, pat) in guidPats.items():
         if pat.match(sourceGUID):
             return name
+    sys.stderr.write('Unknown GUID: "' + sourceGUID + '"\n')
     return 'un'
 
 def createUser(userid, name):
