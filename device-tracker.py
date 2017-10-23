@@ -42,9 +42,9 @@ while more:
     conn.request('GET', '/v3/groups?page=%d' % page, None, headers)
     data = json.loads(conn.getresponse().read().decode('utf-8'))
     if data['meta']['code'] != 200:
-        sys.stderr.print('Error with reading request: ')
+        sys.stderr.write('Error with reading request: \n')
         for s in data['meta']['errors']:
-            sys.stderr.print('  ' + s)
+            sys.stderr.write('  ' + s + '\n')
         sys.exit(1)
     resp = data['response']
     if len(resp) == 0:
@@ -89,9 +89,9 @@ for gr in selected:
                         (read, count, gr['name']))
                 sys.stdout.flush()
         else:
-            sys.stderr.print('Error with reading request: ')
+            sys.stderr.write('Error with reading request: \n')
             for s in data.meta.code.errors:
-                sys.stderr.print('  ' + s)
+                sys.stderr.write('  ' + s + '\n')
             sys.exit(1)
     print('')
 
